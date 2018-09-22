@@ -26,8 +26,6 @@ router.post('/justify', auth.apiAuth,  async (req, res) => {
   await fn.updateUser({ email, numberOfWord })
   const isAllowed = fn.canUseApi(email, numberOfWord) 
 
-  console.log(isAllowed)
-
   isAllowed ?
   res.json(fn.justifyText(text)) : 
   res.status(402).json('Payment Required')
