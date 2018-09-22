@@ -1,4 +1,4 @@
-const port = process.env.PORT || 4000
+const port = 4000
 const express = require('express')
 const cors = require('cors')
 const bodyParser = require('body-parser')
@@ -14,4 +14,4 @@ app.get('/', (req, res) => res.json('Hello World'))
 
 app.use('/api', api)
 
-app.listen(port, () => console.log(`lister on port ${port}`))
+app.listen(process.env.PORT || port, () => console.log(`listen on port ${port}`))

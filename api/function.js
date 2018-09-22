@@ -2,7 +2,7 @@ const util = require('util')
 const path = require('path')
 const fs = require('fs')
 const writeFile = util.promisify(fs.writeFile)
-const userPath = __dirname + '/../db/users/'
+const userPath = __dirname + '/../db/'
 const d = new Date()
 const date = d.toJSON().slice(0, 10)
 
