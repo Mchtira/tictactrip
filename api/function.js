@@ -2,7 +2,7 @@ const util = require('util')
 const path = require('path')
 const fs = require('fs')
 const writeFile = util.promisify(fs.writeFile)
-const userPath = __dirname + '/../db/users/'
+const userPath = __dirname + '/../db/'
 const d = new Date()
 const date = d.toJSON().slice(0, 10)
 
@@ -39,6 +39,29 @@ const justifyText = text => {
     
     return str.join('')
   }
+
+  const longWord = str => {
+    if (str.length > 80) {
+      const spaceLeftLine = maxCharByLine - line[0].length
+      const charCanFit = str.slice(0, spaceLeftLine)
+      str = str.slice(spaceLeftLine)
+      line.push(charCanFit.join(''))
+      formatedText[i] = line.join('')                  // save the actual line
+      line = []                                        // new line 
+      i++
+
+      while (str.length > maxCharByLine) {
+        line.push(str.slice(0, maxCharByLine).join(''))
+        str = str.slice(maxCharByLine)
+        formatedText[i] = line.join('')                // save the actual line
+        line = []                                      // new line 
+        i++
+      }
+      
+      line.push(str.join(''))
+      charCounter = line.join('').length               // return the size of the line
+    }
+  }
   
   text.trim()
     .split('\n')                                       // save the format of the text
@@ -49,27 +72,30 @@ const justifyText = text => {
         .map((word, index) => {                        // transform word into array of chars and add a space before words
           word = word.split('')
           if (index > 0) word.unshift(' ')             // don't add space if it's the first word of a paragraph
-
-            return word
+          return word
         })
 
         .forEach(word => {
-          charCounter += word.length                   // size of the actual line + the actual word 
-          if(charCounter <= maxCharByLine) {
-            line.push(word.join(''))
+          if (word.length > 80) {
+            longWord(word)
+          } else {
+              charCounter += word.length                   // size of the actual line + the actual word 
 
-          } else if (charCounter > maxCharByLine) {    // if the word can't fit in the actual line 
-            formatedText[i] = line.join('')            // save the actual line
-            formatedText[i] = addSpace(formatedText[i])// and justify it
-            line = []                                  // new line 
-            line.push(word.join('').trim())            // remove space, put the word on a new line
-            charCounter = word.length                  // and set the counter with the actual word length
-            i++
+            if(charCounter <= maxCharByLine) {
+              line.push(word.join(''))
+
+            } else if (charCounter > maxCharByLine) {    // if the word can't fit in the actual line 
+              formatedText[i] = line.join('')            // save the actual line
+              formatedText[i] = addSpace(formatedText[i])// and justify it
+              line = []                                  // new line 
+              line.push(word.join('').trim())            // remove space, put the word on a new line
+              charCounter = word.length                  // and set the counter with the actual word length
+              i++
+            }
           }
-
           charCounter = line.join('').length           // return the size of the line
         })
-
+        
       formatedText[formatedText.length - 1] !== '\n' ? // add \n if it's a new paragraph 
       formatedText.push(line.join('')) :
       formatedText.push(line.join(''), '\n')
