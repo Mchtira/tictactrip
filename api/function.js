@@ -1,7 +1,4 @@
 const config = require(__dirname + '/apiConfig.js')
-
-console.log(config)
-
 const justifyText = text => {
   let formatedText = []
   let charCounter = 0
