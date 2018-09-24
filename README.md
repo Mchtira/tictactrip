@@ -13,5 +13,5 @@ API responde with your text justify with 80 chararacters by line
 /!\ You can justify 80 000 words per day 
 
 # In the future 
-  - Payment module that allow you to break limit and justify more than 80 000 words !
+  - Payment module that allow you to break the limit and justify more than 80 000 words !
   - Choose the number of chararacters by line !
