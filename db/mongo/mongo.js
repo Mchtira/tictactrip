@@ -54,10 +54,8 @@ const canUseApi = async (email, numberOfWord) => {
   const user = await userModel.findOne({ email }) 
   const query = { email: email }
   const isAllowed = user.totalWord <= config.maxWordPerDay ? true : false
-  console.log(email)
   if (!isAllowed) {
     user.totalWord -= numberOfWord
-    console.log(user)
     try { await userModel.findOneAndUpdate(query, user) }
     catch (err) { throw err }
   }
