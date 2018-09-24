@@ -1,7 +1,7 @@
 const config = require(__dirname + '/../../api/apiConfig.js')
 const mongoose = require('mongoose')
 const path = require('path')
-const mongoUrl = process.env.mongoDb || 'mongodb://anyway:lollillol2@ds113003.mlab.com:13003/overkilldb'
+const mongoUrl = process.env.mongoDb
 const db = mongoose.connection
 const d = new Date()
 const date = d.toJSON().slice(0, 10)

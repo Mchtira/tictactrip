@@ -7,7 +7,7 @@ const justifyText = text => {
 
   const addSpace = str => {                            // add space until str.length === maxcharbyline
     let spaceNeeded = config.maxCharByLine - str.length
-    str = str.split(' ')                               // array of word
+    str = str.split(' ')                               // array of words
     const lastWord = str.pop()                         // remove last word, so i don't add space after it
     str = str.map(word => word += ' ')                 // add space after every word
 
@@ -31,8 +31,8 @@ const justifyText = text => {
     config.maxCharByLine
 
     const charCanFit = str.slice(0, spaceLeftLine)
-    str = str.slice(spaceLeftLine)
-    line.push(charCanFit.join(''))
+    str = str.slice(spaceLeftLine)                   // cut the word 
+    line.push(charCanFit.join(''))                   // and put first part in the actual line
     formatedText[i] = line.join('')                  // save the actual line
     line = []                                        // new line 
     i++
@@ -40,12 +40,13 @@ const justifyText = text => {
     while (str.length > config.maxCharByLine) {
       line.push(str.slice(0, config.maxCharByLine).join(''))
       str = str.slice(config.maxCharByLine)
-      formatedText[i] = line.join('')                // save the actual line
-      line = []                                      // new line 
+      formatedText[i] = line.join('')
+      line = []
       i++
     }
     
     line.push(str.join(''))
+
     charCounter = line.join('').length               // return the size of the line
   }
   
@@ -54,13 +55,11 @@ const justifyText = text => {
     .forEach((paragraph) => {
       paragraph.trim()
         .split(' ')                                    // split on every word
-
         .map((word, index) => {                        // transform word into array of chars and add a space before words
           word = word.split('')
           if (index > 0) word.unshift(' ')             // don't add space if it's the first word of a paragraph
           return word
         })
-
         .forEach(word => {
           if (word.length > 80) {
             longWord(word)
