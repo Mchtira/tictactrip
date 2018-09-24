@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken')
-const secret = 'supersecret'
+const secret = process.env.jwtSecret || 'supersecret'
 
 const apiAuth = (req, res, next) => {
   const token = jwt.verify(req.headers['x-access-token'], secret)
