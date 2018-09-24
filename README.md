@@ -1,6 +1,6 @@
 # TicTacTrip exercise
 
-An API that justify a text...
+An API that justify a text given as parameter
 
 # How to use it 
 
