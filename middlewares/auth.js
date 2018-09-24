@@ -9,5 +9,5 @@ const apiAuth = (req, res, next) => {
 }
 
 module.exports = {
-  apiAuth
+  apiAuth,
 }
