@@ -1,7 +1,7 @@
 const path = require('path')
 const mongoose = require('mongoose')
 const config = require(path.join(__dirname, '/../../api/apiConfig.js'))
-const UserModel = require(path.join(__dirname, '/model/UserModel.js'))
+const UserModel = require(path.join(__dirname, '/models/UserModel.js'))
 const mongoUrl = process.env.mongoDb
 const d = new Date()
 const date = d.toJSON().slice(0, 10)
@@ -21,10 +21,10 @@ const updateUser = async ({ email, numberOfWord }) => {
   const user = await UserModel.findOne({ email })
   if (!user) {
     if (numberOfWord) {
-      try { await new UserModel({ email, totalWord: numberOfWord, date }).save() }
+      try { await new UserModel({ email, totalWord: numberOfWord, date }).save() } 
       catch (err) { throw err }
     } else {
-      try { await new UserModel({ email, totalWord: 0, date }).save() }
+      try { await new UserModel({ email, totalWord: 0, date }).save() } 
       catch (err) { throw err }
     }
 
@@ -34,7 +34,7 @@ const updateUser = async ({ email, numberOfWord }) => {
       const query = { email: email }
       if (date === user.date) {
         user.totalWord += numberOfWord
-        try { await UserModel.findOneAndUpdate(query, user) }
+        try { await UserModel.findOneAndUpdate(query, user) } 
         catch (err) { throw err }
       } else {
         try { await UserModel.findOneAndUpdate(query, { email, totalWord: numberOfWord, date }) } 

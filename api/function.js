@@ -46,9 +46,8 @@ const justifyText = text => {
       line = []
       i++
     }
-
     line.push(str.join(''))
-
+    
     charCounter = line.join('').length // return the size of the line
   }
 
@@ -72,7 +71,7 @@ const justifyText = text => {
               line.push(word.join(''))
             } else if (charCounter > config.maxCharByLine) { // if the word can't fit in the actual line
               formatedText[i] = line.join('') // save the actual line
-              formatedText[i] = addSpace(formatedText[i])// and justify it
+              formatedText[i] = addSpace(formatedText[i]) // and justify it
               line = [] // new line
               line.push(word.join('').trim()) // remove space, put the word on a new line
               charCounter = word.length // and set the counter with the actual word length
@@ -82,9 +81,7 @@ const justifyText = text => {
           charCounter = line.join('').length // return the size of the line
         })
 
-      formatedText[formatedText.length - 1] !== '\n' // add \n if it's a new paragraph
-        ? formatedText.push(line.join(''))
-        : formatedText.push(line.join(''), '\n')
+      formatedText.push(line.join(''))
 
       charCounter = 0
       line = []
