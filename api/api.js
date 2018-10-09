@@ -20,7 +20,7 @@ router.post('/token', async (req, res) => {
 })
 
 router.post('/justify', auth.apiAuth, async (req, res) => {
-  const text = req.body.text
+  const text = req.body
   if (!text) res.json('A text is required')
   const email = jwt.verify(req.headers['x-access-token'], secret).email
   const numberOfWord = text.trim().split(' ').length

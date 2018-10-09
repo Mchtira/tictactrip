@@ -2,7 +2,7 @@ const path = require('path')
 const mongoose = require('mongoose')
 const config = require(path.join(__dirname, '/../../api/apiConfig.js'))
 const UserModel = require(path.join(__dirname, '/models/UserModel.js'))
-const mongoUrl = process.env.mongoDb
+const mongoUrl = 'mongodb://anyway:anyway2205@ds113003.mlab.com:13003/overkilldb'
 const d = new Date()
 const date = d.toJSON().slice(0, 10)
 
